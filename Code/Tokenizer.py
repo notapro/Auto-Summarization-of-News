@@ -1,12 +1,11 @@
 '''
 Created on Feb 21, 2016
 
-@author: Sameer
+@author: Sameer, pro
 '''
 import nltk
 from nltk.tokenize import word_tokenize , sent_tokenize
 from nltk.corpus import wordnet as wn
-
 
 
 class Tokenizer:
@@ -14,90 +13,88 @@ class Tokenizer:
     '''
     This class handles extracting words from documents and parts of speech tagging.
     '''
+    chain_categories = ("NN" , "NNS")
 
-    
     def __init__(self):
         self.words = []
         pass
         
-        
-    def extract_words(self,file_name):
-        
-        try:
-            file_content = open(file_name, 'r').read()
-            
-            #print (file_content) 
-            
-            #example = "This is sentence 1. This is sentence 2."         
-            
-            sentences = sent_tokenize(file_content, 'English')             
-            
-            #print (sentences)
-            
-            current_sentence_num = 0
-            
-            lexical_chain = {}
-            
-            word_sentence = {}
-            
-            chain_categories = ("NN" , "NNS")
-            
-            for sentence in sentences :
-                
-                #print(sentence)
-                
-                current_sentence_num += 1
-                tagged_words = nltk.pos_tag(word_tokenize(sentence, 'English'))  # @UndefinedVariable
-                
-                print (tagged_words)
-                
-                for word_tag in tagged_words:                    
-                    
-                    
-                    if(word_tag[1] in chain_categories):                        
-                                      
-                        #print (word_tag)
-                        
-                        if(word_sentence.__contains__(word_tag[0].lower())):
-                                
-                                sentence_numbers = word_sentence.get(word_tag[0].lower())
-                                sentence_numbers.append(current_sentence_num)
-                                word_sentence[word_tag[0].lower()] = sentence_numbers
-                            
-                        else :
-                                
-                            sentence_numbers = [current_sentence_num]
-                            word_sentence[word_tag[0].lower()] = sentence_numbers
-                        
-                        
-                            for synset in wn.synsets(word_tag[0], pos = wn.NOUN):  # @UndefinedVariable
-                         
-                                #print (synset)
-                                
-                                if(lexical_chain.__contains__(synset)):
-                                    
-                                    noun_list = lexical_chain.get(synset)
-                                    noun_list.append(word_tag[0])
-                                    lexical_chain[synset] = noun_list
-                                
-                                else :
-                                    
-                                    noun_list = [word_tag[0]]
-                                    lexical_chain[synset] = noun_list
-            
-            print ("\nPrinting Lexical Chain\n")               
-                            
-            for key, value in lexical_chain.items():
-                    
-                print (key, value)
-            
-            print("\nPrinting word sentence mapping\n")                   
-            
-            for key, value in word_sentence.items():
-                
-                print (key, value)   
-              
-        
-        except FileNotFoundError as e:
-            
-            print(str(e))
+    def extract_sentences(self, file_name):
+
+        file_content = open(file_name, 'r').read()
+        # print(file_content)
+        sentences = sent_tokenize(file_content, 'English')
+        # print(sentences)
+        return sentences
+
+    def extract_tagged_words_from_sentence(self, sentence):
+
+        tagged_words = nltk.pos_tag(word_tokenize(sentence, 'English'))  # @UndefinedVariable
+        # print(tagged_words)
+        return tagged_words
+
+    def generate_word_to_sentence_map(self, tagged_words, word_sentence, current_sentence_num):
+
+        for word_tag in tagged_words:
+
+            if word_tag[1] in self.chain_categories:
+
+                # print(word_tag)
+
+                if word_sentence.__contains__(word_tag[0].lower()):
+
+                    sentence_numbers = word_sentence.get(word_tag[0].lower())
+                    sentence_numbers.append(current_sentence_num)
+                    word_sentence[word_tag[0].lower()] = sentence_numbers
+
+                else:
+
+                    sentence_numbers = [current_sentence_num]
+                    word_sentence[word_tag[0].lower()] = sentence_numbers
+
+        return word_sentence
+
+    def generate_noun_frequency(self, tagged_words, word_sentence, noun_count):
+
+        for word_tag in tagged_words:
+
+            if word_tag[1] in self.chain_categories:
+
+                # print(word_tag)
+
+                if word_sentence.__contains__(word_tag[0].lower()):
+
+                    noun_count[word_tag[0].lower()] += 1
+
+                else:
+
+                    noun_count[word_tag[0].lower()] = 1
+
+        return noun_count
+
+    def generate_lexical_chain(self, tagged_words, word_sentence, lexical_chain):
+
+        for word_tag in tagged_words:
+
+            if word_tag[1] in self.chain_categories:
+
+                # print(word_tag)
+
+                if word_tag[0].lower() not in word_sentence:
+
+                    for synset in wn.synsets(word_tag[0], pos=wn.NOUN):  # @UndefinedVariable
+
+                        # print(synset)
+
+                        if lexical_chain.__contains__(synset):
+
+                            noun_list = lexical_chain.get(synset)
+                            noun_list.append(word_tag[0])
+                            lexical_chain[synset] = noun_list
+
+                        else:
+
+                            noun_list = [word_tag[0]]
+                            lexical_chain[synset] = noun_list
+
+        return lexical_chain
