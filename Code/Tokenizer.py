@@ -89,12 +89,12 @@ class Tokenizer:
                         if lexical_chain.__contains__(synset):
 
                             noun_list = lexical_chain.get(synset)
-                            noun_list.append(word_tag[0])
+                            noun_list.append(word_tag[0].lower())
                             lexical_chain[synset] = noun_list
 
                         else:
 
-                            noun_list = [word_tag[0]]
+                            noun_list = [word_tag[0].lower()]
                             lexical_chain[synset] = noun_list
 
         return lexical_chain

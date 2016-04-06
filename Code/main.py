@@ -4,16 +4,22 @@ Created on Feb 21, 2016
 @author: Sameer, pro
 '''
 from Code.Tokenizer import Tokenizer
+from Code.Chain_Scoring import Chain_Scoring
+from Code.Extractor import Extractor
+
 
 
 def main():
     
     current_sentence_num = 0
-    lexical_chain = {}
+    lexical_chain = {}    
     word_sentence = {}
     noun_count = {}
     input_file = "../Input Files/InputFile1.txt"
+    output_file = "../Output Files/OutputFile1.txt"
     tokenizer_object = Tokenizer()
+    scoring_object = Chain_Scoring()
+    extractor_object = Extractor()
     
     try:
 
@@ -44,6 +50,16 @@ def main():
         for key, value in noun_count.items():
 
             print(key, value)
+            
+        
+        lexical_chain_scores = scoring_object.score_lexical_chain(lexical_chain, noun_count)
+        
+        strong_synsets = scoring_object.get_strong_sysnsets(lexical_chain_scores)
+        
+        strong_sentence_numbers = extractor_object.get_strong_sentence_numbers(strong_synsets, lexical_chain, word_sentence)
+        
+        extractor_object.extract_strong_sentences(sentences, strong_sentence_numbers, output_file)
+        
 
     except FileNotFoundError as e:
 
