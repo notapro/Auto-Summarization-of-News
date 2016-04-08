@@ -54,7 +54,8 @@ class Tokenizer:
 
         return word_sentence
 
-    def generate_noun_frequency(self, tagged_words, word_sentence, noun_count):
+    def generate_noun_frequency(self, tagged_words, word_sentence, word_count):
+        
 
         for word_tag in tagged_words:
 
@@ -64,13 +65,13 @@ class Tokenizer:
 
                 if word_sentence.__contains__(word_tag[0].lower()):
 
-                    noun_count[word_tag[0].lower()] += 1
+                    word_count[word_tag[0].lower()] += 1
 
                 else:
 
-                    noun_count[word_tag[0].lower()] = 1
+                    word_count[word_tag[0].lower()] = 1
 
-        return noun_count
+        return word_count
 
     def generate_lexical_chain(self, tagged_words, word_sentence, lexical_chain):
 

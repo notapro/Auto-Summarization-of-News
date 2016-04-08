@@ -30,7 +30,7 @@ class Chain_Scoring:
         
         return chain_score
     
-    def get_strong_sysnsets(self, lexical_chain_scores):
+    def get_strong_synsets(self, lexical_chain_scores):
         
         strong_synsets = []
         
