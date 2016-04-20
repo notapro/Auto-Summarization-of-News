@@ -39,7 +39,7 @@ class Extractor:
                 
                 raise KeyError ("Strong Synset not found in lexical chain")
             
-        print (sentence_numbers)
+        #print (sentence_numbers)
         
         return sentence_numbers
     
@@ -52,6 +52,6 @@ class Extractor:
         for sentence_num in sorted(strong_sentence_numbers):
             
             target.write (sentences[sentence_num-1] + " ")
-            print (sentences[sentence_num-1] + " ")
+            #print (sentences[sentence_num-1] + " ")
             
         target.close()

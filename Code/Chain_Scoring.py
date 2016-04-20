@@ -11,7 +11,7 @@ class Chain_Scoring:
     def score_lexical_chain(self,lexical_chain, noun_count):
         
         chain_score = {}
-        print("\nChain Scores\n")
+        #print("\nChain Scores\n")
 
         for synset, words in lexical_chain.items():
 
@@ -26,7 +26,7 @@ class Chain_Scoring:
 
             chain_score[synset] = length*homogeneity
 
-            print(synset, chain_score[synset])
+            #print(synset, chain_score[synset])
         
         return chain_score
     
@@ -53,7 +53,7 @@ class Chain_Scoring:
                 
         print ("\n\n\Printing Strong Chains \n\n")
                 
-        print (strong_synsets)
+        #print (strong_synsets)
                 
         return strong_synsets
         

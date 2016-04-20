@@ -3,11 +3,11 @@ Created on Feb 21, 2016
 
 @author: Sameer, pro
 '''
-from Code.Tokenizer import Tokenizer
-from Code.Chain_Scoring import Chain_Scoring
-from Code.Extractor import Extractor
 
-
+from Tokenizer import Tokenizer
+from Chain_Scoring import Chain_Scoring
+from Extractor import Extractor
+from tp import Sentence_Scorer
 
 def main():
     
@@ -15,11 +15,18 @@ def main():
     lexical_chain = {}    
     word_sentence = {}  
     word_count = {} 
-    input_file = "../Input Files/InputFile1.txt"
-    output_file = "../Output Files/OutputFile1.txt"
+    input_file = "Input Files/InputFile1.txt"
+    output_file = "Output Files/OutputFile1.txt"
+
+    lexical_chain = {}
+    word_sentence = {}
+    noun_count = {}
+    
     tokenizer_object = Tokenizer()
     scoring_object = Chain_Scoring()
     extractor_object = Extractor()
+
+    
     
     try:
 
@@ -34,30 +41,31 @@ def main():
             word_sentence = tokenizer_object.generate_word_to_sentence_map(tagged_words, word_sentence, current_sentence_num)
             
 
-        print("\nPrinting Lexical Chain\n")
+        # print("\nPrinting Lexical Chain\n")
 
-        for key, value in lexical_chain.items():
+        # for key, value in lexical_chain.items():
 
-            print(key, value)
+        #     print(key, value)
 
-        print("\nPrinting word sentence mapping\n")
+        # print("\nPrinting word sentence mapping\n")
 
-        for key, value in word_sentence.items():
+        # for key, value in word_sentence.items():
 
-            print(key, value)
+        #     print(key, value)
 
-        print("\nNoun Count\n")
+        # print("\nNoun Count\n")
 
-        for key, value in word_count.items():
+        # for key, value in word_count.items():
 
-            print(key, value)
+        #     print(key, value)
             
         
         lexical_chain_scores = scoring_object.score_lexical_chain(lexical_chain, word_count)        
         strong_synsets = scoring_object.get_strong_synsets(lexical_chain_scores)        
         strong_sentence_numbers = extractor_object.get_strong_sentence_numbers(strong_synsets, lexical_chain, word_sentence, word_count)
         extractor_object.extract_strong_sentences(sentences, strong_sentence_numbers, output_file)
-        
+        sentence_scorer = Sentence_Scorer()
+        sentence_scorer.score(strong_synsets,lexical_chain,sentences,word_sentence)
 
     except FileNotFoundError as e:
 
