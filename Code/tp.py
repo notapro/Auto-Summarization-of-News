@@ -3,6 +3,8 @@ from nltk.corpus import stopwords
 class Sentence_Scorer:
 
 	def score(self,strong_synsets,lexical_chain,sentences,word_sentence):
+		
+		strong_sentence_nums = []
 		sentence_score = []
 
 		#print(sentences)
@@ -54,9 +56,11 @@ class Sentence_Scorer:
 		for sentence in sentences:
 			
 			if sentence_score[j] >= average_score:
-				print(sentence + " ")
+				strong_sentence_nums.append(j)
 
 			j = j + 1
 
-		return sentence_score
+		return strong_sentence_nums
 
+
+	

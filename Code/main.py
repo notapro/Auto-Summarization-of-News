@@ -15,8 +15,8 @@ def main():
     lexical_chain = {}    
     word_sentence = {}  
     word_count = {} 
-    input_file = "Input Files/InputFile1.txt"
-    output_file = "Output Files/OutputFile1.txt"
+    input_file = "../Input Files/InputFile1.txt"
+    output_file = "../Output Files/OutputFile1.txt"
 
     lexical_chain = {}
     word_sentence = {}
@@ -31,11 +31,17 @@ def main():
     try:
 
         sentences = tokenizer_object.extract_sentences(input_file)
+        
+        proper_nouns_count = {}
+        proper_noun_sentences = {}
 
         for sentence in sentences:
 
             current_sentence_num += 1
             tagged_words = tokenizer_object.extract_tagged_words_from_sentence(sentence)
+            
+            extractor_object.add_proper_nouns(tagged_words, proper_nouns_count, proper_noun_sentences , current_sentence_num )
+            
             word_count = tokenizer_object.generate_noun_frequency(tagged_words, word_sentence, word_count)
             lexical_chain = tokenizer_object.generate_lexical_chain(tagged_words, word_sentence, lexical_chain)
             word_sentence = tokenizer_object.generate_word_to_sentence_map(tagged_words, word_sentence, current_sentence_num)
@@ -65,8 +71,32 @@ def main():
         strong_sentence_numbers = extractor_object.get_strong_sentence_numbers(strong_synsets, lexical_chain, word_sentence, word_count)
         extractor_object.extract_strong_sentences(sentences, strong_sentence_numbers, output_file)
         sentence_scorer = Sentence_Scorer()
-        sentence_scorer.score(strong_synsets,lexical_chain,sentences,word_sentence)
-
+        strong_sentence_nums=sentence_scorer.score(strong_synsets,lexical_chain,sentences,word_sentence)
+        
+        print("normal strong sentences {}".format(strong_sentence_nums))
+        
+        strong_proper_nouns_sentences = extractor_object.get_strong_proper_noun_sentences(proper_noun_sentences, proper_nouns_count)
+        
+        print("proper noun sentences {}".format(strong_proper_nouns_sentences))
+        
+        strong_sentence_nums = list(set(strong_sentence_nums).union(strong_proper_nouns_sentences))
+        
+        strong_sentence_nums.append(0)
+        
+        unique_sentences = [ii for n,ii in enumerate(strong_sentence_nums) if ii not in strong_sentence_nums[:n]]
+        
+        print(unique_sentences)
+        
+        target = open(output_file,'w')
+        
+        target.truncate()
+        
+        for sentence_num in sorted(unique_sentences):
+            print(sentences[sentence_num]+"\n")
+            target.write (sentences[sentence_num-1] + "\n")
+            
+        target.close()
+        
     except FileNotFoundError as e:
 
         print(str(e))

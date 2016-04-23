@@ -1,1 +1,73 @@
-Iceland's prime minister resigned Tuesday, becoming the first political victim of a mushrooming worldwide scandal over hidden offshore financial dealings exposed in the so-called Panama Papers. 
+The latter will be used
+
+by Microsoft in its new online entertainment service to help
+
+people identify the kind of restaurants or entertainment they
+
+are most likely to enjoy.
+But Gates dismissed such reservations.
+Is this alien-sounding technology
+
+Microsoft’s new secret weapon?
+Bayesian networks are complex diagrams that organize the
+
+body of knowledge in any given area by mapping out cause-andeffect
+
+relationships among key variables and encoding them
+
+with numbers that represent the extent to which one variable
+
+is likely to affect another.
+Programmed into computers, these systems can automatically
+
+generate optimal predictions or decisions even when key pieces
+
+of information are missing.
+When Microsoft in 1993 hired Eric Horvitz, David Heckerman
+
+and Jack Breese, pioneers in the development of Bayesian systems,
+
+colleagues in the field were surprised.
+The field was still
+
+an obscure, largely academic enterprise.
+Today the field is still obscure.
+But scratch the surface of
+
+a range of new Microsoft products and you’re likely to find
+
+Bayesian networks embedded in the software.
+And Bayesian
+
+nets are being built into models that are used to predict oil and
+
+stock prices, control the space shuttle and diagnose disease.
+Microsoft is unquestionably the most aggressive in exploiting
+
+the new approach.
+The company offers a free Web service that
+
+helps customers diagnose printing problems with their computers
+
+and recommends the quickest way to resolve them.
+The latest version of Microsoft Office software uses the technology
+
+to offer a user help based on past experience, how the
+
+mouse is being moved and what task is being done.
+“If his actions show he is distracted, he is likely to need help,”
+
+Horvitz says.
+“If he’s been working on a chart, chances are he
+
+needs help formatting the chart”.
+Although the company did important work for the National
+
+Aeronautics and Space Administration and on medical diagnostics,
+
+Horvitz says, “It’s not like your grandmother will use
+
+it”.
+Microsoft’s activities in the field are now helping to build a
+
+groundswell of support for Bayesian ideas.
