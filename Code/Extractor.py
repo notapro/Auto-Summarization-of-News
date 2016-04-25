@@ -82,24 +82,17 @@ class Extractor:
                     proper_noun_sentences[word_tag[0].lower()] = sentence_nums
         
         
-    def get_strong_proper_noun_sentences(self, proper_noun_sentences, proper_nouns_count):
+    def get_strong_proper_noun_sentences(self, proper_noun_sentences, proper_nouns_count, num_sentences):
         
         total_count = 0
         total_proper_nouns = 0
         
         strong_proper_nouns_sentences = []
         
-        for key, value in proper_nouns_count.items():
-            
-            total_proper_nouns += 1
-            
-            total_count += value
-            
-        avg_count = total_count/ total_proper_nouns
         
         for key, value in proper_nouns_count.items():
             
-            if (value >= 2*avg_count):
+            if (value >= num_sentences/3):
                 strong_proper_nouns_sentences.append(proper_noun_sentences[key][0])
                   
         

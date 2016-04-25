@@ -75,7 +75,7 @@ def main():
         
         print("normal strong sentences {}".format(strong_sentence_nums))
         
-        strong_proper_nouns_sentences = extractor_object.get_strong_proper_noun_sentences(proper_noun_sentences, proper_nouns_count)
+        strong_proper_nouns_sentences = extractor_object.get_strong_proper_noun_sentences(proper_noun_sentences, proper_nouns_count, current_sentence_num)
         
         print("proper noun sentences {}".format(strong_proper_nouns_sentences))
         

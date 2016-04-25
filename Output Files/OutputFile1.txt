@@ -18,11 +18,6 @@ relationships among key variables and encoding them
 with numbers that represent the extent to which one variable
 
 is likely to affect another.
-Programmed into computers, these systems can automatically
-
-generate optimal predictions or decisions even when key pieces
-
-of information are missing.
 When Microsoft in 1993 hired Eric Horvitz, David Heckerman
 
 and Jack Breese, pioneers in the development of Bayesian systems,
