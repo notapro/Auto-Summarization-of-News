@@ -16,7 +16,6 @@ The steps for installation are:
 	java -Xmx5g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer
 2) Execute the python file main.py to execute the project.
 3)The input is read from outside the Code directory from the location './Input Files/input_file1.txt'.
-4) The output is stored in the location outside the Code directory at './Output Files/OutputFile1.txt'.
 
 
 #Code Structure:

@@ -1,5 +1,6 @@
 from nltk.corpus import stopwords
 
+
 class Sentence_Scorer:
 
 	def score(self,strong_synsets,lexical_chain,sentences,word_sentence):

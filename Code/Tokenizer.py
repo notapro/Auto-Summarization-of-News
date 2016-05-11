@@ -19,13 +19,17 @@ class Tokenizer:
         self.words = []
         pass
         
-    def extract_sentences(self, file_name):
+    def extract_sentences(self, file_content):
 
-        file_content = open(file_name, 'r').read()
         # print(file_content)
         sentences = sent_tokenize(file_content, 'English')
         # print(sentences)
         return sentences
+
+    def get_text(self, file_name):
+        file_content = open(file_name, 'r').read()
+        return file_content
+
 
     def extract_tagged_words_from_sentence(self, sentence):
 
